@@ -1,0 +1,10 @@
+cinder: {build: cinder}
+glance: {build: glance}
+horizon: {build: horizon}
+keystone: {build: keystone}
+neutron: {build: neutron}
+nova: {build: nova}
+portage: {build: portage}
+portageclient: {build: portageclient}
+portagesrv: {build: portagesrv}
+swift: {build: swift}

@@ -1,0 +1,20 @@
+---
+default:
+  from: No
+  maintainer: No
+  tag: ""
+  use:
+    +: []
+    -: []
+  packages:
+    default:
+      install: Yes
+      package_prefix: ""
+      version_delim: ""
+      use:
+        +: []
+        -: []
+
+required:
+  from: ""
+  maintainer: ""

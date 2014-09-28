@@ -1,0 +1,91 @@
+---
+default:
+  from: "docker_portageclient"
+  maintainer: "Stefan Junker <code@stefanjunker.de>"
+  packages:
+    default:
+      package_prefix: "="
+      version_delim: "-"
+
+portage:
+  from: "steveej/gentoo-base:latest"
+
+portagesrv:
+  from: "docker_portage"
+  packages:
+    net-ftp/pure-ftpd:
+      package_prefix: ""
+      version_delim: ""
+      version: ""
+
+portageclient:
+  from: "docker_portage"
+  packages:
+    curlftpfs:
+      package_prefix: ""
+      version_delim: ""
+      version: ""
+
+cinder:
+  packages:
+    sys-cluster/cinder:
+      install: Yes
+      version: 2014.1.2*
+      use:
+        +: [mysql]
+
+glance:
+  packages:
+    app-admin/glance:
+      install: Yes
+      version: 2014.1.2*
+      use:
+        +: [mysql]
+
+horizon:
+  packages:
+    www-apps/horizon:
+      install: Yes
+      version: 2014.1.2*
+
+keystone:
+  packages:
+    sys-auth/keystone:
+      install: Yes
+      version: 2014.1.2*
+      use: 
+        +: [mysql]
+
+neutron:
+  packages:
+    net-misc/openvswitch:
+      install: Yes
+      version: 2.3*
+      use:
+        -: [modules]
+    sys-cluster/neutron:
+      version: 2014.1.2*
+      use:
+        +: [mysql, metadata, server, openvswitch, l3, linuxbridge, dhcp]
+
+nova:
+  use:
+    +: [rbd, spice, usbredir, xen]
+  packages:
+    net-misc/openvswitch:
+      install: No
+      version: 2.3*
+      use:
+        -: [modules]
+    sys-cluster/nova:
+      version: 2014.1.2*
+      use:
+        +: [mysql]
+
+swift:
+  packages:
+    sys-cluster/swift:
+      install: Yes
+      version: 2014.1.9999
+      use:
+        +: [account, container, object, proxy]

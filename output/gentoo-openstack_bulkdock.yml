@@ -1,0 +1,168 @@
+cinder:
+  from: docker_portageclient
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    sys-cluster/cinder:
+      install: true
+      package_prefix: '='
+      use:
+        +: [mysql]
+        '-': []
+      version: 2014.1.2*
+      version_delim: '-'
+  tag: ''
+  use:
+    +: []
+    '-': []
+glance:
+  from: docker_portageclient
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    app-admin/glance:
+      install: true
+      package_prefix: '='
+      use:
+        +: [mysql]
+        '-': []
+      version: 2014.1.2*
+      version_delim: '-'
+  tag: ''
+  use:
+    +: []
+    '-': []
+horizon:
+  from: docker_portageclient
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    www-apps/horizon:
+      install: true
+      package_prefix: '='
+      use:
+        +: []
+        '-': []
+      version: 2014.1.2*
+      version_delim: '-'
+  tag: ''
+  use:
+    +: []
+    '-': []
+keystone:
+  from: docker_portageclient
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    sys-auth/keystone:
+      install: true
+      package_prefix: '='
+      use:
+        +: [mysql]
+        '-': []
+      version: 2014.1.2*
+      version_delim: '-'
+  tag: ''
+  use:
+    +: []
+    '-': []
+neutron:
+  from: docker_portageclient
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    net-misc/openvswitch:
+      install: true
+      package_prefix: '='
+      use:
+        +: []
+        '-': [modules]
+      version: 2.3*
+      version_delim: '-'
+    sys-cluster/neutron:
+      install: true
+      package_prefix: '='
+      use:
+        +: [mysql, metadata, server, openvswitch, l3, linuxbridge, dhcp]
+        '-': []
+      version: 2014.1.2*
+      version_delim: '-'
+  tag: ''
+  use:
+    +: []
+    '-': []
+nova:
+  from: docker_portageclient
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    net-misc/openvswitch:
+      install: false
+      package_prefix: '='
+      use:
+        +: []
+        '-': [modules]
+      version: 2.3*
+      version_delim: '-'
+    sys-cluster/nova:
+      install: true
+      package_prefix: '='
+      use:
+        +: [mysql]
+        '-': []
+      version: 2014.1.2*
+      version_delim: '-'
+  tag: ''
+  use:
+    +: [rbd, spice, usbredir, xen]
+    '-': []
+portage:
+  from: steveej/gentoo-base:latest
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages: {}
+  tag: ''
+  use:
+    +: []
+    '-': []
+portageclient:
+  from: docker_portage
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    curlftpfs:
+      install: true
+      package_prefix: ''
+      use:
+        +: []
+        '-': []
+      version: ''
+      version_delim: ''
+  tag: ''
+  use:
+    +: []
+    '-': []
+portagesrv:
+  from: docker_portage
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    net-ftp/pure-ftpd:
+      install: true
+      package_prefix: ''
+      use:
+        +: []
+        '-': []
+      version: ''
+      version_delim: ''
+  tag: ''
+  use:
+    +: []
+    '-': []
+swift:
+  from: docker_portageclient
+  maintainer: Stefan Junker <code@stefanjunker.de>
+  packages:
+    sys-cluster/swift:
+      install: true
+      package_prefix: '='
+      use:
+        +: [account, container, object, proxy]
+        '-': []
+      version: 2014.1.9999
+      version_delim: '-'
+  tag: ''
+  use:
+    +: []
+    '-': []

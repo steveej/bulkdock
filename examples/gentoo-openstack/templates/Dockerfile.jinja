@@ -1,0 +1,40 @@
+{% block metadata %}
+FROM {{ from }}
+MAINTAINER {{ maintainer }}
+{% endblock %}
+{% block pre_run %}
+{% endblock %}
+RUN \ 
+{% block run %}
+	mount /usr/portage && \
+{% endblock %}
+{% block global_use %}
+{% for use in use["+"] %}
+	euse -E {{ use }} && \
+{% endfor %}
+{% for use in use["-"] %}
+	euse -D {{ use }} && \
+{% endfor %}
+{% endblock %}
+{% set install= [] %}
+{% for k, v in packages.iteritems() %}
+{% set atom = v.package_prefix+k+v.version_delim+v.version %}
+{% for use in v["use"]["+"] %}
+	euse -E {{ use }} -p {{ atom }} && \
+{% endfor %}
+{% for use in v["use"]["-"] %}
+	euse -D {{ use }} -p {{ atom }} && \
+{% endfor %}
+{% if v.install == True %}
+{% do install.append(atom) %}
+{% endif %}
+{% endfor %}
+{% if install|count > 0 %}
+	emerge -DNk --autounmask-write=y {{ install|join(" ") }} && \ 
+	etc-update --automode -5 && \
+	emerge -DNk {{ install|join(" ") }} && \
+{% block install %}	true{% endblock %}
+{% endif %}
+
+{% block post_install %}
+{% endblock %}

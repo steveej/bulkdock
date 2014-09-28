@@ -1,0 +1,4 @@
+.idea
+.virtualenv
+*.pyc
+*.egg-info
