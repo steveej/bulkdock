@@ -7,7 +7,7 @@ setup(
     license='',
     author='Stefan Junker',
     author_email='code@stefanjunker.de',
-    description='Generate a Gentoo-based Docker container environment ',
+    description='A Gentoo-biased Docker container creation utility',
     entry_points={
         'console_scripts': [
             'bulkdock=bulkdock:main'
